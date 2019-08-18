@@ -38,8 +38,14 @@ app.get("/reverseGeocode", (req, res) => {
 });
 
 app.post("/saveMarker", function(req, res) {
+  let marker = markers.find((marker, i) => marker[0].formattedAddress == req.body.marker[0].formattedAddress);
+  let index = markers.indexOf(marker);
+  if (index == -1) {
   markers.push(req.body.marker);
-  res.json({ Success: "Marker saved" });
+  res.json({ Success: "Marker saved" });}
+  else{
+    res.status(500).json({ Error: "The location you entered has already been added" });
+  }
 });
 
 app.post("/deleteMarker", function(req, res) {
