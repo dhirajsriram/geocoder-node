@@ -18,14 +18,22 @@ app.use(bodyParser.json());
 app.get("/geocode", (req, res) => {
   var resp = res;
   geocoder.geocode(req.query.address, function(err, res) {
-    resp.send(res);
+    if (err) {
+      resp.status(500).json({ Error: "The data cannot be fetched from the provider. Check your credentials and try again" });
+    } else {
+      resp.send(res);
+    }
   });
 });
 
 app.get("/reverseGeocode", (req, res) => {
   var resp = res;
   geocoder.reverse({ lat: req.query.lat, lon: req.query.lon }, function(err, res) {
-    resp.send(res);
+    if (err) {
+      next(err); // Pass errors to Express.
+    } else {
+      resp.send(res);
+    }
   });
 });
 
@@ -37,27 +45,35 @@ app.post("/saveMarker", function(req, res) {
 app.post("/deleteMarker", function(req, res) {
   let marker = markers.find((marker, i) => marker[0].formattedAddress == req.body.marker);
   let index = markers.indexOf(marker);
-  markers.splice(index, 1);
-  res.json({ Success: "Marker Deleted" });
+  if (index > -1) {
+    markers.splice(index, 1);
+    res.json({ Success: "Marker Deleted" });
+  } else {
+    res.status(500).json({ Error: "The location that you modified cannot be found" });
+  }
 });
 
 app.post("/editMarker", function(req, res) {
   let marker = markers.find((marker, i) => marker[0].formattedAddress == req.body.marker);
   let index = markers.indexOf(marker);
   let resp = res;
-  geocoder.geocode(req.body.edit, function(err, res) {
-    if (index > 0) {
-      markers[index] = res;
-      resp.json({ Success: "Marker Edited" });
-    } else {
-      resp.send(res);
-      markers.push(res)
-    }
-  });
+    geocoder.geocode(req.body.edit, function(err, res) {
+      if (index >= 0) {
+        markers[index] = res;
+        resp.json({ Success: "Marker Edited" });
+      } else {
+        resp.send(res);
+        markers.push(res)
+      }
+    });
 });
 
 app.get("/getMarkers", (req, res) => {
-  res.json({ markers: markers });
+  if (markers.length > 0) {
+    res.json({ markers: markers });
+  } else {
+    res.status(500).json({ Error: "No locations found" });
+  }
 });
 
 var server = app.listen(8081, function() {
