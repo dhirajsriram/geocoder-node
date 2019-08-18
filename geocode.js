@@ -62,8 +62,13 @@ app.post("/editMarker", function(req, res) {
         markers[index] = res;
         resp.json({ Success: "Marker Edited" });
       } else {
+        if(res[0]){
         resp.send(res);
         markers.push(res)
+      }
+      else{
+        resp.status(500).json({ Error: "No relevant address found for the searchterm" });
+      }
       }
     });
 });
