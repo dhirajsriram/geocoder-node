@@ -2,9 +2,9 @@
 
 ## Abstract
 
-A nodeJs application that handles all the CRUD operation and also geocoding and reverse-geocoding for the [Geocoder](https://github.com/dhirajsriram/geocoder) application
+**``[http://ec2-18-223-164-119.us-east-2.compute.amazonaws.com/](http://ec2-18-223-164-119.us-east-2.compute.amazonaws.com/)``**
 
-**Live version of the app can be found [here](http://ec2-18-223-164-119.us-east-2.compute.amazonaws.com/)**
+A nodeJs application that handles all the CRUD operation and also geocoding and reverse-geocoding for the [Geocoder](https://github.com/dhirajsriram/geocoder) application
 
 ## Installation
 
