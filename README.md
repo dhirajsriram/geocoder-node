@@ -17,7 +17,7 @@ npm install
 
 ## Serving Locally
 
-Once the packages have been installed you may the applications locally. You may run `npm start` on the root directory of the applications to serve them locally. The application runs here:
+Once the packages have been installed you may the serve applications locally. You may run `npm start` on the root directory of the applications to serve them locally. The application runs here:
 
 - geocoder-node : [http://localhost:8081](http://localhost:8081)
 
@@ -37,7 +37,7 @@ The front-end and back-end application for geocoder are closely integrated. Any 
 
 ## Description
 
-The application for a **head-less micro-service** based approach. A list of API is defined in the application that handles the various CRUD operations from the front-end
+The application follows a **head-less micro-service** based approach. A list of API is defined in the application that handles the various CRUD operations from the front-end.
 
 `geocode` - Makes an API request to the google maps to retrieve the coordinates based on the search term
 
