@@ -29,6 +29,13 @@ Once the packages have been installed you may the serve applications locally. Yo
 
 `npm run test` - Runs the test scrips on the specific application
 
+## Deployment
+
+- The application has been deployed on AWS to an **EC2** instance.
+- `port 8081` has been opened to accept inbound request
+- A node process runs the application on `port 8081`.
+- The proxied request from apache is served by the node application.
+
 ## Architecture
 
 The front-end and back-end application for geocoder are closely integrated. Any operation related to markers is handled in the back-end which is immediately fetched from the front-end to have the latest version of the data available at all times. Following is an integrated architecture of the applications
